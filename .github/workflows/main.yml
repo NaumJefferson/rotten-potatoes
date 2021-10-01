@@ -31,6 +31,7 @@ jobs:
             na1jefferson/rotten-potatoes:v${{github.run_number}}
             
   CD:
+    needs: [CI]
     runs-on: ubuntu-latest
     
     steps:
@@ -39,9 +40,9 @@ jobs:
         
       - name: Kubernetes set context
         uses: azure/k8s-set-context@v1
-          with:
-            method: kubeconfig
-            kubeconfig: ${{secrets.K8S_KUBECONFIG}}
+        with:
+          method: kubeconfig
+          kubeconfig: ${{secrets.K8S_KUBECONFIG}}
         
       
       
